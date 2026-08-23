@@ -5,3 +5,4 @@ pyyaml
 tokenizers
 nltk
 sentence-transformers
+chromadb

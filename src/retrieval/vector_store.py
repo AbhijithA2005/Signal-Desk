@@ -84,6 +84,57 @@ class VectorStore:
                 metadatas=batch_metadatas,
                 embeddings=embeddings.tolist(),
             )
+    def search(
+        self,
+        query: str,
+        top_k: int = 5,
+    ) -> list[dict[str, Any]]:
+        """Return the top-k semantically similar chunks."""
+        if not query.strip():
+            raise ValueError("Query cannot be empty.")
+
+        if top_k <= 0:
+            raise ValueError("top_k must be greater than zero.")
+
+        query_embedding = self.model.encode(
+            query,
+            normalize_embeddings=True,
+            convert_to_numpy=True,
+        )
+
+        result = self.collection.query(
+            query_embeddings=[query_embedding.tolist()],
+            n_results=top_k,
+            include=[
+                "documents",
+                "metadatas",
+                "distances",
+            ],
+        )
+
+        hits: list[dict[str, Any]] = []
+
+        ids = result.get("ids", [[]])[0]
+        documents = result.get("documents", [[]])[0]
+        metadatas = result.get("metadatas", [[]])[0]
+        distances = result.get("distances", [[]])[0]
+
+        for chunk_id, document, metadata, distance in zip(
+            ids,
+            documents,
+            metadatas,
+            distances,
+        ):
+            hits.append(
+                {
+                    "chunk_id": chunk_id,
+                    "text": document,
+                    "metadata": metadata,
+                    "distance": float(distance),
+                }
+            )
+
+        return hits
     def reset(self) -> None:
         """Delete and recreate the current collection."""
         try:
