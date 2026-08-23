@@ -11,3 +11,6 @@ models/
 .pytest_cache/
 .mypy_cache/
 .vscode/
+
+# Local Kilo Code tooling
+.kilo/
