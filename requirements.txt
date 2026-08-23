@@ -2,3 +2,5 @@ numpy
 torch
 pymupdf
 pyyaml
+tokenizers
+nltk
