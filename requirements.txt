@@ -6,3 +6,4 @@ tokenizers
 nltk
 sentence-transformers
 chromadb
+requests
