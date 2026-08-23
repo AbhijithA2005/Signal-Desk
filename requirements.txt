@@ -4,3 +4,4 @@ pymupdf
 pyyaml
 tokenizers
 nltk
+sentence-transformers
