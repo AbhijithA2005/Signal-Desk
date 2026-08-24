@@ -182,7 +182,9 @@ def chunk_pages(
     overlap_tokens: int = 100,
 ) -> List[Chunk]:
     """
-    Create sentence-aware cross-page chunks.
+    Create sentence-aware chunks independently for each document.
+
+    Documents never share chunk boundaries.
 
     Target:
         ~700 tokens
@@ -209,103 +211,111 @@ def chunk_pages(
             "overlap_tokens must be >= 0 and < max_tokens."
         )
 
-    sentences = build_sentence_stream(
-        pages,
-        tokenizer,
-        max_tokens=max_tokens,
-    )
+    # Group pages by document while preserving the original
+    # deterministic ordering.
+    documents: dict[str, List[PageDocument]] = {}
 
-    if not sentences:
-        return []
+    for page in pages:
+        documents.setdefault(page.document_id, []).append(page)
 
-    chunks: List[Chunk] = []
+    all_chunks: List[Chunk] = []
 
-    start = 0
+    for document_id, document_pages in documents.items():
+        sentences = build_sentence_stream(
+            document_pages,
+            tokenizer,
+            max_tokens=max_tokens,
+        )
 
-    while start < len(sentences):
-        current_tokens = 0
-        end = start
+        if not sentences:
+            continue
 
-        while end < len(sentences):
-            sentence_tokens = sentences[end].token_count
+        document_chunks: List[Chunk] = []
+        start = 0
 
-            if (
-                end > start
-                and current_tokens + sentence_tokens > max_tokens
+        while start < len(sentences):
+            current_tokens = 0
+            end = start
+
+            while end < len(sentences):
+                sentence_tokens = sentences[end].token_count
+
+                if (
+                    end > start
+                    and current_tokens + sentence_tokens > max_tokens
+                ):
+                    break
+
+                current_tokens += sentence_tokens
+                end += 1
+
+                if current_tokens >= target_tokens:
+                    break
+
+            # If the chunk is still too short, add sentences up to
+            # min_tokens without exceeding max_tokens.
+            while (
+                current_tokens < min_tokens
+                and end < len(sentences)
+                and current_tokens + sentences[end].token_count <= max_tokens
             ):
-                break
+                current_tokens += sentences[end].token_count
+                end += 1
 
-            current_tokens += sentence_tokens
-            end += 1
+            # Safety fallback for an oversized individual sentence.
+            if end == start:
+                end += 1
+                current_tokens = sentences[start].token_count
 
-            if current_tokens >= target_tokens:
-                break
+            chunk_sentences = sentences[start:end]
 
-        # If the chunk is still too short, add sentences up to min_tokens
-        # without exceeding max_tokens.
-        while (
-            current_tokens < min_tokens
-            and end < len(sentences)
-            and current_tokens + sentences[end].token_count <= max_tokens
-        ):
-            current_tokens += sentences[end].token_count
-            end += 1
-
-        # Safety fallback.
-        if end == start:
-            end += 1
-            current_tokens = sentences[start].token_count
-
-        chunk_sentences = sentences[start:end]
-
-        chunk_text = " ".join(
-            sentence.text for sentence in chunk_sentences
-        )
-
-        source_pages = sorted(
-            {
-                sentence.page_number
+            chunk_text = " ".join(
+                sentence.text
                 for sentence in chunk_sentences
-            }
-        )
-
-        chunk_index = len(chunks)
-
-        chunks.append(
-            Chunk(
-                chunk_id=(
-                    f"{pages[0].document_id}"
-                    f"_C{chunk_index:03d}"
-                ),
-                document_id=pages[0].document_id,
-                source_file=pages[0].source_file,
-                source_pages=source_pages,
-                chunk_index=chunk_index,
-                text=chunk_text,
-                token_count=_token_count(
-                    tokenizer,
-                    chunk_text,
-                ),
             )
-        )
 
-        if end >= len(sentences):
-            break
+            source_pages = sorted(
+                {
+                    sentence.page_number
+                    for sentence in chunk_sentences
+                }
+            )
 
-        # Select a sentence-aligned suffix of the current chunk
-        # to become the beginning of the next chunk.
-        next_start = _choose_overlap_start(
-            sentences,
-            start,
-            end,
-            overlap_tokens,
-        )
+            chunk_index = len(document_chunks)
 
-        # Guarantee forward progress.
-        if next_start <= start:
-            next_start = start + 1
+            document_chunks.append(
+                Chunk(
+                    chunk_id=(
+                        f"{document_id}"
+                        f"_C{chunk_index:03d}"
+                    ),
+                    document_id=document_id,
+                    source_file=document_pages[0].source_file,
+                    source_pages=source_pages,
+                    chunk_index=chunk_index,
+                    text=chunk_text,
+                    token_count=_token_count(
+                        tokenizer,
+                        chunk_text,
+                    ),
+                )
+            )
 
-        start = next_start
+            if end >= len(sentences):
+                break
 
+            next_start = _choose_overlap_start(
+                sentences,
+                start,
+                end,
+                overlap_tokens,
+            )
 
-    return chunks
+            if next_start <= start:
+                next_start = start + 1
+
+            start = next_start
+
+        all_chunks.extend(document_chunks)
+
+    return all_chunks
