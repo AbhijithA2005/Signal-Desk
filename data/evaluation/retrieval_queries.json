@@ -1,9 +1,10 @@
 {
-  "dataset": "rag001_retrieval_dev_v1",
-  "description": "Small manually labeled development set for comparing dense, BM25, hybrid, and reranked retrieval on RAG_001.",
+  "dataset": "rag001_retrieval_dev_v2",
+  "description": "Development evaluation set for comparing dense, BM25, hybrid, and reranked retrieval on RAG_001.",
   "queries": [
     {
       "id": "Q001",
+      "type": "direct_factual",
       "query": "What is retrieval-augmented generation?",
       "relevant_chunks": [
         "RAG_001_C000"
@@ -11,6 +12,7 @@
     },
     {
       "id": "Q002",
+      "type": "exact_term",
       "query": "What is Maximum Inner Product Search used for in RAG?",
       "relevant_chunks": [
         "RAG_001_C004"
@@ -18,6 +20,7 @@
     },
     {
       "id": "Q003",
+      "type": "acronym",
       "query": "What is DPR in the RAG system?",
       "relevant_chunks": [
         "RAG_001_C003",
@@ -26,10 +29,116 @@
     },
     {
       "id": "Q004",
+      "type": "method_comparison",
       "query": "What are RAG-Sequence and RAG-Token?",
       "relevant_chunks": [
         "RAG_001_C003",
         "RAG_001_C005"
+      ]
+    },
+    {
+      "id": "Q005",
+      "type": "semantic_paraphrase",
+      "query": "How do RAG-Sequence and RAG-Token differ in using retrieved documents?",
+      "relevant_chunks": [
+        "RAG_001_C003",
+        "RAG_001_C005"
+      ]
+    },
+    {
+      "id": "Q006",
+      "type": "retrieval_architecture",
+      "query": "How does RAG retrieve external documents for a query?",
+      "relevant_chunks": [
+        "RAG_001_C001",
+        "RAG_001_C004"
+      ]
+    },
+    {
+      "id": "Q007",
+      "type": "retrieval_architecture",
+      "query": "What is the role of the retriever in the RAG architecture?",
+      "relevant_chunks": [
+        "RAG_001_C001",
+        "RAG_001_C004"
+      ]
+    },
+    {
+      "id": "Q008",
+      "type": "exact_term",
+      "query": "What does MIPS mean?",
+      "relevant_chunks": [
+        "RAG_001_C004"
+      ]
+    },
+    {
+      "id": "Q009",
+      "type": "acronym",
+      "query": "What does DPR provide to the RAG model?",
+      "relevant_chunks": [
+        "RAG_001_C004"
+      ]
+    },
+    {
+      "id": "Q010",
+      "type": "conceptual",
+      "query": "What is the difference between parametric and non-parametric memory in RAG?",
+      "relevant_chunks": [
+        "RAG_001_C000",
+        "RAG_001_C001"
+      ]
+    },
+    {
+      "id": "Q011",
+      "type": "why_question",
+      "query": "Why combine parametric and non-parametric memory in RAG?",
+      "relevant_chunks": [
+        "RAG_001_C000",
+        "RAG_001_C001"
+      ]
+    },
+    {
+      "id": "Q012",
+      "type": "method_specific",
+      "query": "What is RAG-Token?",
+      "relevant_chunks": [
+        "RAG_001_C003",
+        "RAG_001_C005"
+      ]
+    },
+    {
+      "id": "Q013",
+      "type": "method_specific",
+      "query": "What is RAG-Sequence?",
+      "relevant_chunks": [
+        "RAG_001_C003",
+        "RAG_001_C005"
+      ]
+    },
+    {
+      "id": "Q014",
+      "type": "outcome",
+      "query": "How does RAG affect factuality and specificity of generated text?",
+      "relevant_chunks": [
+        "RAG_001_C000",
+        "RAG_001_C007",
+        "RAG_001_C008"
+      ]
+    },
+    {
+      "id": "Q015",
+      "type": "failure_mode",
+      "query": "What is retrieval collapse in RAG?",
+      "relevant_chunks": [
+        "RAG_001_C031"
+      ]
+    },
+    {
+      "id": "Q016",
+      "type": "implementation",
+      "query": "How many retrieved documents are used for RAG-Token and RAG-Sequence in the open-domain QA implementation?",
+      "relevant_chunks": [
+        "RAG_001_C028"
       ]
     }
   ]
