@@ -1,0 +1,36 @@
+{
+  "dataset": "rag001_retrieval_dev_v1",
+  "description": "Small manually labeled development set for comparing dense, BM25, hybrid, and reranked retrieval on RAG_001.",
+  "queries": [
+    {
+      "id": "Q001",
+      "query": "What is retrieval-augmented generation?",
+      "relevant_chunks": [
+        "RAG_001_C000"
+      ]
+    },
+    {
+      "id": "Q002",
+      "query": "What is Maximum Inner Product Search used for in RAG?",
+      "relevant_chunks": [
+        "RAG_001_C004"
+      ]
+    },
+    {
+      "id": "Q003",
+      "query": "What is DPR in the RAG system?",
+      "relevant_chunks": [
+        "RAG_001_C003",
+        "RAG_001_C004"
+      ]
+    },
+    {
+      "id": "Q004",
+      "query": "What are RAG-Sequence and RAG-Token?",
+      "relevant_chunks": [
+        "RAG_001_C003",
+        "RAG_001_C005"
+      ]
+    }
+  ]
+}
