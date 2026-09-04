@@ -1,0 +1,130 @@
+{
+  "dataset": "research_corpus_chunk_dev_v1",
+  "description": "Four-paper chunk-level retrieval development benchmark.",
+  "version": "1.0",
+  "queries": [
+    {
+      "query_id": "RCC_001",
+      "query": "What are the two models introduced by RAG for marginalizing over latent documents?",
+      "relevant_chunks": ["RAG_001_C003"],
+      "type": "method_specific"
+    },
+    {
+      "query_id": "RCC_002",
+      "query": "What retrieval problem is involved in calculating the top-k documents with the highest prior probability in RAG?",
+      "relevant_chunks": ["RAG_001_C004"],
+      "type": "exact_term"
+    },
+    {
+      "query_id": "RCC_003",
+      "query": "What is the main difference between RAG-Sequence and RAG-Token?",
+      "relevant_chunks": ["RAG_001_C003"],
+      "type": "method_comparison"
+    },
+    {
+      "query_id": "RCC_004",
+      "query": "Why can documents that contain clues but not the answer verbatim still contribute to a correct RAG answer?",
+      "relevant_chunks": ["RAG_001_C008"],
+      "type": "conceptual"
+    },
+    {
+      "query_id": "RCC_005",
+      "query": "What retrieval failure mode did the RAG authors observe in preliminary experiments?",
+      "relevant_chunks": ["RAG_001_C031"],
+      "type": "failure_mode"
+    },
+
+    {
+      "query_id": "RCC_006",
+      "query": "Why is pair-wise sentence comparison with BERT not scalable for very large collections?",
+      "relevant_chunks": ["RAG_002_C001"],
+      "type": "why_question"
+    },
+    {
+      "query_id": "RCC_007",
+      "query": "What pooling strategies does SBERT use to derive a fixed-size sentence embedding?",
+      "relevant_chunks": ["RAG_002_C004"],
+      "type": "method_specific"
+    },
+    {
+      "query_id": "RCC_008",
+      "query": "Which similarity measure does SBERT use to compare sentence embeddings?",
+      "relevant_chunks": ["RAG_002_C006"],
+      "type": "exact_term"
+    },
+    {
+      "query_id": "RCC_009",
+      "query": "Why is sentence embedding similarity a challenging task for SBERT compared with directly comparing two sentences with BERT?",
+      "relevant_chunks": ["RAG_002_C009"],
+      "type": "conceptual"
+    },
+    {
+      "query_id": "RCC_010",
+      "query": "How much time did SBERT reduce the effort to for the evaluated semantic similarity task?",
+      "relevant_chunks": ["RAG_002_C015"],
+      "type": "direct_factual"
+    },
+
+    {
+      "query_id": "RCC_011",
+      "query": "What operator does ColBERT use to compute the interaction between each query embedding and the document embeddings?",
+      "relevant_chunks": ["RAG_003_C004"],
+      "type": "exact_term"
+    },
+    {
+      "query_id": "RCC_012",
+      "query": "Why does ColBERT encode documents offline?",
+      "relevant_chunks": ["RAG_003_C004"],
+      "type": "why_question"
+    },
+    {
+      "query_id": "RCC_013",
+      "query": "How does ColBERT represent queries and documents before late interaction?",
+      "relevant_chunks": ["RAG_003_C008"],
+      "type": "method_specific"
+    },
+    {
+      "query_id": "RCC_014",
+      "query": "What makes ColBERT much cheaper than BERT for ranking?",
+      "relevant_chunks": ["RAG_003_C017"],
+      "type": "outcome"
+    },
+    {
+      "query_id": "RCC_015",
+      "query": "What is the main conclusion of the ColBERT paper about its retrieval architecture?",
+      "relevant_chunks": ["RAG_003_C022"],
+      "type": "conceptual"
+    },
+
+    {
+      "query_id": "RCC_016",
+      "query": "What is Reciprocal Rank Fusion?",
+      "relevant_chunks": ["RAG_004_C000"],
+      "type": "definition"
+    },
+    {
+      "query_id": "RCC_017",
+      "query": "What value of k was found to be near-optimal in the pilot experiments?",
+      "relevant_chunks": ["RAG_004_C001"],
+      "type": "direct_factual"
+    },
+    {
+      "query_id": "RCC_018",
+      "query": "What did the pilot experiments show about the choice of k for Reciprocal Rank Fusion?",
+      "relevant_chunks": ["RAG_004_C001"],
+      "type": "conceptual"
+    },
+    {
+      "query_id": "RCC_019",
+      "query": "How did RRF compare with the individual rankings in the reported experiments?",
+      "relevant_chunks": ["RAG_004_C003"],
+      "type": "comparison"
+    },
+    {
+      "query_id": "RCC_020",
+      "query": "What statistical result showed that RRF was better than all individual rankings?",
+      "relevant_chunks": ["RAG_004_C003"],
+      "type": "outcome"
+    }
+  ]
+}
