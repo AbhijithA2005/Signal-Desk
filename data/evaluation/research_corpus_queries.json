@@ -1,0 +1,105 @@
+{
+  "dataset": "research_corpus_dev_v1",
+  "description": "Cross-document development benchmark for the four-paper research corpus.",
+  "queries": [
+    {
+      "id": "R001",
+      "type": "direct_factual",
+      "query": "What is retrieval-augmented generation?",
+      "relevant_documents": ["RAG_001"]
+    },
+    {
+      "id": "R002",
+      "type": "conceptual",
+      "query": "How does RAG use parametric and non-parametric memory?",
+      "relevant_documents": ["RAG_001"]
+    },
+    {
+      "id": "R003",
+      "type": "retrieval",
+      "query": "How are documents retrieved in the RAG architecture?",
+      "relevant_documents": ["RAG_001"]
+    },
+    {
+      "id": "R004",
+      "type": "method",
+      "query": "What is Maximum Inner Product Search used for in RAG?",
+      "relevant_documents": ["RAG_001"]
+    },
+
+    {
+      "id": "R005",
+      "type": "direct_factual",
+      "query": "What is Sentence-BERT?",
+      "relevant_documents": ["RAG_002"]
+    },
+    {
+      "id": "R006",
+      "type": "semantic_similarity",
+      "query": "How are sentence embeddings used to measure semantic similarity?",
+      "relevant_documents": ["RAG_002"]
+    },
+    {
+      "id": "R007",
+      "type": "architecture",
+      "query": "How does Sentence-BERT generate sentence representations?",
+      "relevant_documents": ["RAG_002"]
+    },
+    {
+      "id": "R008",
+      "type": "application",
+      "query": "What tasks can Sentence-BERT support?",
+      "relevant_documents": ["RAG_002"]
+    },
+
+    {
+      "id": "R009",
+      "type": "direct_factual",
+      "query": "What is ColBERT?",
+      "relevant_documents": ["RAG_003"]
+    },
+    {
+      "id": "R010",
+      "type": "architecture",
+      "query": "How does ColBERT perform late interaction?",
+      "relevant_documents": ["RAG_003"]
+    },
+    {
+      "id": "R011",
+      "type": "retrieval",
+      "query": "How does ColBERT represent queries and passages for retrieval?",
+      "relevant_documents": ["RAG_003"]
+    },
+    {
+      "id": "R012",
+      "type": "method",
+      "query": "What is the purpose of late interaction in ColBERT?",
+      "relevant_documents": ["RAG_003"]
+    },
+
+    {
+      "id": "R013",
+      "type": "direct_factual",
+      "query": "What is Reciprocal Rank Fusion?",
+      "relevant_documents": ["RAG_004"]
+    },
+    {
+      "id": "R014",
+      "type": "method",
+      "query": "How does Reciprocal Rank Fusion combine ranked lists?",
+      "relevant_documents": ["RAG_004"]
+    },
+    {
+      "id": "R015",
+      "type": "comparison",
+      "query": "Why can Reciprocal Rank Fusion outperform individual ranking methods?",
+      "relevant_documents": ["RAG_004"]
+    },
+    {
+      "id": "R016",
+      "type": "information_retrieval",
+      "query": "How is rank information used in Reciprocal Rank Fusion?",
+      "relevant_documents": ["RAG_004"]
+    }
+  ]
+}
