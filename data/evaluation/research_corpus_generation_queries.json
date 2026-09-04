@@ -1,0 +1,115 @@
+{
+  "dataset": "research_corpus_generation_dev_v1",
+  "version": "1.0",
+  "description": "Grounded generation evaluation questions for the four-paper research corpus.",
+  "queries": [
+    {
+      "query_id": "GEN_001",
+      "query": "What are RAG-Sequence and RAG-Token?",
+      "relevant_chunks": ["RAG_001_C003"],
+      "expected_claims": [
+        "RAG-Sequence uses the same document to predict each target token.",
+        "RAG-Token can condition each target token on a different document."
+      ]
+    },
+    {
+      "query_id": "GEN_002",
+      "query": "What retrieval problem is used to find the top-k documents in RAG?",
+      "relevant_chunks": ["RAG_001_C004"],
+      "expected_claims": [
+        "The problem is Maximum Inner Product Search (MIPS)."
+      ]
+    },
+    {
+      "query_id": "GEN_003",
+      "query": "What retrieval failure mode did the RAG authors observe?",
+      "relevant_chunks": ["RAG_001_C031"],
+      "expected_claims": [
+        "The retrieval component could collapse and retrieve the same documents regardless of the input."
+      ]
+    },
+
+    {
+      "query_id": "GEN_004",
+      "query": "Why is ordinary BERT unsuitable for large-scale semantic similarity search?",
+      "relevant_chunks": ["RAG_002_C000", "RAG_002_C001"],
+      "expected_claims": [
+        "BERT requires the sentence pair to be processed together.",
+        "The number of pairwise inference computations becomes prohibitively large."
+      ]
+    },
+    {
+      "query_id": "GEN_005",
+      "query": "What pooling strategies does SBERT use?",
+      "relevant_chunks": ["RAG_002_C004"],
+      "expected_claims": [
+        "CLS-token output.",
+        "Mean pooling.",
+        "Max pooling."
+      ]
+    },
+    {
+      "query_id": "GEN_006",
+      "query": "How does SBERT compare sentence embeddings?",
+      "relevant_chunks": ["RAG_002_C006"],
+      "expected_claims": [
+        "SBERT uses cosine similarity."
+      ]
+    },
+
+    {
+      "query_id": "GEN_007",
+      "query": "What is the MaxSim operation in ColBERT?",
+      "relevant_chunks": ["RAG_003_C004"],
+      "expected_claims": [
+        "It computes maximum similarity between each query embedding and the document embeddings.",
+        "The resulting scalar outputs are summed across query terms."
+      ]
+    },
+    {
+      "query_id": "GEN_008",
+      "query": "Why does ColBERT encode documents offline?",
+      "relevant_chunks": ["RAG_003_C004", "RAG_003_C006"],
+      "expected_claims": [
+        "Document encoding is shifted offline.",
+        "This makes query processing cheaper and allows query computation to be amortized across ranked documents."
+      ]
+    },
+    {
+      "query_id": "GEN_009",
+      "query": "How does ColBERT make neural retrieval more efficient?",
+      "relevant_chunks": ["RAG_003_C022"],
+      "expected_claims": [
+        "Queries and documents are independently encoded into fine-grained representations.",
+        "Their representations interact through cheap, pruning-friendly computations.",
+        "This speeds up query processing while retaining retrieval quality."
+      ]
+    },
+
+    {
+      "query_id": "GEN_010",
+      "query": "What is Reciprocal Rank Fusion?",
+      "relevant_chunks": ["RAG_004_C000"],
+      "expected_claims": [
+        "It is a method for combining document rankings from multiple information retrieval systems."
+      ]
+    },
+    {
+      "query_id": "GEN_011",
+      "query": "What value of k was near-optimal in the RRF pilot experiments?",
+      "relevant_chunks": ["RAG_004_C001"],
+      "expected_claims": [
+        "k = 60 was near-optimal."
+      ]
+    },
+    {
+      "query_id": "GEN_012",
+      "query": "How did RRF compare with the individual rankings?",
+      "relevant_chunks": ["RAG_004_C003"],
+      "expected_claims": [
+        "RRF outperformed all individual rankings in the reported experiments.",
+        "The improvement over the best individual ranking was statistically significant."
+      ]
+    }
+  ]
+}
