@@ -8,3 +8,5 @@ sentence-transformers
 chromadb
 requests
 rank-bm25
+
+pytest
