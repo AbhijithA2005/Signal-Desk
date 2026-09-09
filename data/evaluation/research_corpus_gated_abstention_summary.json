@@ -1,0 +1,13 @@
+{
+  "experiment": "gated_abstention",
+  "gate_type": "reranker_score_threshold",
+  "gate_threshold": -2.0,
+  "num_answerable": 12,
+  "num_unanswerable": 8,
+  "answerable_accepted": 12,
+  "unanswerable_rejected": 8,
+  "false_abstentions": 0,
+  "false_acceptances": 0,
+  "answerable_acceptance_rate": 1.0,
+  "unanswerable_abstention_rate": 1.0
+}

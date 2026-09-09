@@ -1,0 +1,47 @@
+{
+  "dataset": "research_corpus_abstention_dev_v1",
+  "version": "1.0",
+  "description": "Questions whose answers are intentionally not supported by the four-paper research corpus.",
+  "queries": [
+    {
+      "query_id": "ABS_001",
+      "query": "Who founded OpenAI?",
+      "answerable": false
+    },
+    {
+      "query_id": "ABS_002",
+      "query": "What is the current population of India?",
+      "answerable": false
+    },
+    {
+      "query_id": "ABS_003",
+      "query": "What programming language was used to create the Linux kernel?",
+      "answerable": false
+    },
+    {
+      "query_id": "ABS_004",
+      "query": "What is the capital city of Australia?",
+      "answerable": false
+    },
+    {
+      "query_id": "ABS_005",
+      "query": "Who won the 2024 United States presidential election?",
+      "answerable": false
+    },
+    {
+      "query_id": "ABS_006",
+      "query": "What is the boiling point of water at sea level?",
+      "answerable": false
+    },
+    {
+      "query_id": "ABS_007",
+      "query": "What is the latest version of Python?",
+      "answerable": false
+    },
+    {
+      "query_id": "ABS_008",
+      "query": "How many parameters does GPT-5 have?",
+      "answerable": false
+    }
+  ]
+}
