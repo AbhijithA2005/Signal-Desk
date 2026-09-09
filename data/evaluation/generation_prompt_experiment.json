@@ -1,0 +1,20 @@
+{
+  "experiment": "citation_prompt_comparison_v1",
+  "dataset": "research_corpus_generation_dev_v1",
+  "queries": 12,
+  "baseline": {
+    "require_citations": false,
+    "answers_with_citation": 3,
+    "citation_adherence": 0.25,
+    "total_citations": 7,
+    "invalid_citations": 0
+  },
+  "strict": {
+    "require_citations": true,
+    "answers_with_citation": 1,
+    "citation_adherence": 0.0833333333,
+    "total_citations": 1,
+    "invalid_citations": 0
+  },
+  "conclusion": "The strict citation prompt decreased citation adherence on this development set, so it should not replace the baseline prompt."
+}
