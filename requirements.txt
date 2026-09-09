@@ -10,3 +10,5 @@ requests
 rank-bm25
 
 pytest
+fastapi
+httpx2
