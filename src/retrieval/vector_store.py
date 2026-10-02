@@ -88,6 +88,7 @@ class VectorStore:
         self,
         query: str,
         top_k: int = 5,
+        document_ids: list[str] | None = None,
     ) -> list[dict[str, Any]]:
         """Return the top-k semantically similar chunks."""
         if not query.strip():
@@ -95,6 +96,8 @@ class VectorStore:
 
         if top_k <= 0:
             raise ValueError("top_k must be greater than zero.")
+        if document_ids == []:
+            return []
 
         query_embedding = self.model.encode(
             query,
@@ -102,15 +105,21 @@ class VectorStore:
             convert_to_numpy=True,
         )
 
-        result = self.collection.query(
-            query_embeddings=[query_embedding.tolist()],
-            n_results=top_k,
-            include=[
+        query_options: dict[str, Any] = {
+            "query_embeddings": [query_embedding.tolist()],
+            "n_results": top_k,
+            "include": [
                 "documents",
                 "metadatas",
                 "distances",
             ],
-        )
+        }
+        if document_ids is not None:
+            query_options["where"] = {
+                "document_id": {"$in": document_ids}
+            }
+
+        result = self.collection.query(**query_options)
 
         hits: list[dict[str, Any]] = []
 
@@ -135,6 +144,13 @@ class VectorStore:
             )
 
         return hits
+
+    def delete_document(self, document_id: str) -> None:
+        """Remove all stored chunks belonging to one document."""
+        self.collection.delete(
+            where={"document_id": document_id},
+        )
+
     def reset(self) -> None:
         """Delete and recreate the current collection."""
         try:

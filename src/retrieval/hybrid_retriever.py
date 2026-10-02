@@ -24,6 +24,7 @@ class HybridRetriever:
         query: str,
         top_k: int = 5,
         candidate_k: int = 10,
+        document_ids: list[str] | None = None,
     ) -> list[dict[str, Any]]:
         """Return a fused ranking from dense and BM25 retrieval."""
         if not query.strip():
@@ -36,15 +37,19 @@ class HybridRetriever:
             raise ValueError(
                 "candidate_k must be greater than zero."
             )
+        if document_ids == []:
+            return []
 
         dense_results = self.dense_store.search(
             query,
             top_k=candidate_k,
+            document_ids=document_ids,
         )
 
         bm25_results = self.bm25_store.search(
             query,
             top_k=candidate_k,
+            document_ids=document_ids,
         )
 
         fused: dict[str, dict[str, Any]] = {}

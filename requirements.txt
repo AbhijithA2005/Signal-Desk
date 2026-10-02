@@ -8,6 +8,7 @@ sentence-transformers
 chromadb
 requests
 rank-bm25
+python-multipart
 
 pytest
 fastapi
